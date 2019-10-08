@@ -19,7 +19,6 @@ public class Solution {
                 pairs.put(ar[i], 1);
             }
             return pairsCount;
-
     }
 
     private static final Scanner scanner = new Scanner(System.in);
