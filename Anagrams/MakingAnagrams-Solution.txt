@@ -1,0 +1,59 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    static int makeAnagram(String a, String b) {
+        int len1 = a.length();
+        int len2 = b.length();
+        int countCommonChars = 0;
+        //HashMap to store the characters with count
+        HashMap<Character, Integer> charCount = new HashMap<Character, Integer>();
+        for(int i=0;i<len1;i++) {
+            char curr = a.charAt(i);
+            if(charCount.containsKey(curr)) {
+                charCount.put(curr, charCount.get(curr)+1);
+            } else {
+                charCount.put(curr, 1);
+            }
+        }
+
+        for(int i=0;i<len2;i++) {
+            char curr = b.charAt(i);
+            if(charCount.containsKey(curr)) {
+                //Increment common characters count by 2 to account for both strings
+                countCommonChars+=2;
+                charCount.put(curr, charCount.get(curr)-1);
+                if(charCount.get(curr) == 0) {
+                    charCount.remove(curr);
+                }
+            }
+        }
+        //Number of characters to be deleted is the sum of both strings length minus the common characters count
+        return (len1 + len2 - countCommonChars);
+    }
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String a = scanner.nextLine();
+
+        String b = scanner.nextLine();
+
+        int res = makeAnagram(a, b);
+
+        bufferedWriter.write(String.valueOf(res));
+        bufferedWriter.newLine();
+
+        bufferedWriter.close();
+
+        scanner.close();
+    }
+}
