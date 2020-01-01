@@ -61,26 +61,28 @@ public class Solution {
         }
         DoublyLinkedListNode curr = head;
         DoublyLinkedListNode node = new DoublyLinkedListNode(data);
+        boolean inserted = false;
 
         if(head.data > data) {
+            //insert as first element and return
             node.next = head;
             node.prev = null;
             head.prev = node;
             head = node;
+            return head;
         }
         while(curr != null && curr.next != null) {
             if(curr.data < data && curr.next.data > data) {
                 node.next = curr.next;
                 node.prev = curr;
-                if(curr.next != null) {
-                    curr.next.prev = node;
-                    curr.next = node;
-                }
+                curr.next.prev = node;
+                curr.next = node;
+                inserted = true;
             }
             curr = curr.next;
         }
-
-        if(curr.next == null) {
+        if(!inserted) {
+            //insert as last element
             node.next = null;
             node.prev = curr;
             curr.next = node;
@@ -123,3 +125,4 @@ public class Solution {
         scanner.close();
     }
 }
+
