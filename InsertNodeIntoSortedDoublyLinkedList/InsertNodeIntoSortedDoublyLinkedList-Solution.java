@@ -61,32 +61,33 @@ public class Solution {
         }
         DoublyLinkedListNode curr = head;
         DoublyLinkedListNode node = new DoublyLinkedListNode(data);
-        boolean inserted = false;
-
-        if(head.data > data) {
-            //insert as first element and return
+        if(curr.data > data) {
+            //insert as first element and return new head
             node.next = head;
-            node.prev = null;
             head.prev = node;
             head = node;
             return head;
         }
-        while(curr != null && curr.next != null) {
-            if(curr.data < data && curr.next.data > data) {
-                node.next = curr.next;
-                node.prev = curr;
-                curr.next.prev = node;
-                curr.next = node;
-                inserted = true;
+        while(curr != null) {
+            if(curr.data > data) {
+                System.out.println(curr.data);
+                curr.prev.next = node;
+                node.prev = curr.prev;
+                curr.prev = node;
+                node.next = curr;
+                return head;
             }
             curr = curr.next;
         }
-        if(!inserted) {
-            //insert as last element
-            node.next = null;
-            node.prev = curr;
-            curr.next = node;
+
+        //insert as last element
+        curr = head;
+        while(curr.next != null) {
+            curr = curr.next;
         }
+        curr.next = node;
+        node.prev = curr;
+        node.next = null;
         return head;
     }
 
@@ -125,4 +126,3 @@ public class Solution {
         scanner.close();
     }
 }
-
