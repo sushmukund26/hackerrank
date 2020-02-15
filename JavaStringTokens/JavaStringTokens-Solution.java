@@ -7,15 +7,25 @@ public class Solution {
         Scanner scan = new Scanner(System.in);
         String s = scan.nextLine();
 
-        String delimiters = "[ .,?!']+";
-        String[] tokens = s.split(delimiters);
-        
-        int tokensLen = tokens.length;
-        System.out.println(tokensLen);
-        for(int i=0;i<tokensLen;i++) {
-            System.out.println(tokens[i]);
+        if(s.length() > 400000) {
+            return;
         }
-        scan.close();
+
+        if(s == null || s.equals("") || s.trim().equals("")) {
+            System.out.println("0");
+            return;
+        }
+
+        String delimiters = ("[ !,?.\\_'@]+");
+        String[] tokens = s.trim().split(delimiters);
+
+        System.out.println(tokens.length);
+
+        for(String token : tokens) {
+            System.out.println(token);
+        }
+        
+	scan.close();
     }
 }
 
