@@ -7,10 +7,6 @@ public class Solution {
         Scanner scan = new Scanner(System.in);
         String s = scan.nextLine();
 
-        if(s.length() > 400000) {
-            return;
-        }
-
         if(s == null || s.equals("") || s.trim().equals("")) {
             System.out.println("0");
             return;
